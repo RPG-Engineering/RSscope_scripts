@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-input_chan = 3
+input_chan = "3"
 
 import vxi11
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
