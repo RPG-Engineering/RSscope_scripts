@@ -3,5 +3,5 @@
 
 import vxi11
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
-print(inst.query_str('*IDN?'))
+print(inst.ask("*IDN?"))
 
