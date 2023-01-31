@@ -2,6 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import vxi11
-inst = vix11.Instrument("TCPIP::192.168.178.31::INSTR")
+inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
 print(instr.query_str('*IDN?'))
 
