@@ -5,4 +5,5 @@ import vxi11
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
 print(inst.ask("*IDN?"))
 inst.clear()
-inst.write("RESET")
+inst.write("*RST")
+inst.write("WGENerator1:PRESet.")
