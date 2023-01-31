@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import vxi11
+import time
 
 input_chan = "3"
 StartFrequency = "0.01"
 StopFrequency = "15"
-Time = 60*10
+Time = str(60*10)
 Amplitude = "1"
 
-import vxi11
+
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
 print(inst.ask("*IDN?"))
 inst.clear()
@@ -31,4 +33,6 @@ inst.write("WGENerator<wg>[:ENABle] ON")
 
 
 
-inst.write("TIMebase:SCALe 1")
+inst.write("TIMebase:SCALe 10")
+time.sleep(15)
+print(inst.ask("WGENerator1:FREQuency?"))
