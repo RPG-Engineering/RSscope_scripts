@@ -37,14 +37,13 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
-        print("Testing at frequency "+str(round(f,2))+" Hz")
-        inst.write("TIMebase:SCALe "+str(round(1.0/f/5.0)))
+        print("Testing at frequency "+str(round(f,3))+" Hz")
+        
         inst.write("WGENerator1:FREQuency "+str(f))
-        time.sleep(5)
+        time.sleep(10)
+        inst.write("TIMebase:SCALe "+str(round(1.0/f/3.0)))
         inst.write("RUNSingle")
-        print(int(inst.ask("ACQuire:AVAilable?"))<1)
+        #print(int(inst.ask("ACQuire:AVAilable?"))<1)
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
             time.sleep(1)
-            print ("Tick")
-
         print("Measured "+inst.ask("MEASurement1:RESult:ACTual?")+" Vpp")
