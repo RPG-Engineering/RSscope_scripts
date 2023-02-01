@@ -12,12 +12,12 @@ StartFrequency = 0.05
 StopFrequency = 13.0
 npoints = 100
 Amplitude = 1
-soak_time = 10 # Depends on high pass filter capacitor type
+soak_time = 5 # Depends on high pass filter capacitor type
 freqs = numpy.geomspace(StartFrequency, StopFrequency, num=npoints)
 
 duration = 2
 for f in freqs:
-    duration+=soak_time+1+round(1.0/f/3.0)*10
+    duration+=soak_time+1+round(1.0/f/3.0,2)*10
 print("This should take around "+str(datetime.timedelta(seconds=duration)))
 
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
