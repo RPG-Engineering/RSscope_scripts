@@ -5,6 +5,7 @@ import vxi11
 import time
 import csv
 import numpy
+import datetime
 
 input_chan = "3"
 StartFrequency = 0.05
@@ -12,7 +13,12 @@ StopFrequency = 13.0
 npoints = 100
 Amplitude = 1
 soak_time = 10 # Depends on high pass filter capacitor type
+freqs = numpy.geomspace(StartFrequency, StopFrequency, num=npoints)
 
+duration = 2
+for f in freqs:
+    duration+=soak_time+1+round(1.0/f/3.0)*10
+print("This should take around "+str(datetime.timedelta(seconds=duration)))
 
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
 print(inst.ask("*IDN?"))
@@ -37,7 +43,7 @@ with open('csv/'+timestr+'MXO44vsOldPreamp.csv', mode='w') as csv_file:
     fieldnames = ['freq', 'Vppin', 'Vppout']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
-    for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
+    for f in freqs:
         print("Testing at "+str(round(f,3))+" Hz")
         
         inst.write("WGENerator1:FREQuency "+str(f))
