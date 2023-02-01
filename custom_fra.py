@@ -7,8 +7,8 @@ import csv
 import numpy
 
 input_chan = "3"
-StartFrequency = 0.1
-StopFrequency = 15.0
+StartFrequency = 0.05
+StopFrequency = 13.0
 npoints = 100
 Amplitude = 1
 soak_time = 10 # Depends on high pass filter capacitor type
@@ -33,12 +33,12 @@ inst.write("WGENerator1:VOLTage:VPP "+str(Amplitude))
 inst.write("WGENerator1:ENABle ON")
 
 timestr = time.strftime("%Y%m%d-%H%M%S_")
-with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
+with open('csv/'+timestr+'MXO44vsOldPreamp.csv', mode='w') as csv_file:
     fieldnames = ['freq', 'Vppin', 'Vppout']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
-        print("Testing at frequency "+str(round(f,3))+" Hz")
+        print("Testing at "+str(round(f,3))+" Hz")
         
         inst.write("WGENerator1:FREQuency "+str(f))
         time.sleep(soak_time)
@@ -47,6 +47,6 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         time.sleep(1)
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
             time.sleep(1)
-        result = inst.ask("MEASurement1:RESult:ACTual?")
+        result = round(int(inst.ask("MEASurement1:RESult:ACTual?")),3)
         print("Measured "+result+" Vpp")
         writer.writerow({'freq': round(f,3), 'Vppin': Amplitude, 'Vppout': result})
