@@ -35,8 +35,8 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
-        print("Testing at frequency "+str(f)+" Hz")
-        inst.write("TIMebase:SCALe "+str(1/f))
+        print("Testing at frequency "+str(round(f,2))+" Hz")
+        inst.write("TIMebase:SCALe "+str(round(1.0/f/5.0)))
         inst.write("WGENerator1:FREQuency "+str(f))
         time.sleep(10)
         inst.write("RUNSingle")
