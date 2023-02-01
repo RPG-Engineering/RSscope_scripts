@@ -7,7 +7,7 @@ import csv
 import numpy
 
 input_chan = "3"
-StartFrequency = 0.01
+StartFrequency = 0.1
 StopFrequency = 15.0
 npoints = 100
 Amplitude = 1
@@ -17,7 +17,7 @@ inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
 print(inst.ask("*IDN?"))
 inst.clear()
 inst.write("*RST")
-inst.write("CHANnel"+input_chan+":RANGe 2")
+inst.write("CHANnel"+input_chan+":RANGe "+str(round(Amplitude*2)))
 inst.write("STOP")
 inst.write("WGENerator1:PRESet")
 inst.write("CHANnel1:STATe OFF")
@@ -40,6 +40,7 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         inst.write("WGENerator1:FREQuency "+str(f))
         time.sleep(10)
         inst.write("RUNSingle")
-        while not inst.ask("ACQuire:AVAilable?"):
+        while True:
+            print (inst.ask("STATus:OPERation:CONDition?"))
             time.sleep(1)
         print("Measured "+inst.ask("MEASurement1:RESult:ACTual")+" Vpp")
