@@ -48,7 +48,7 @@ with open('csv/'+timestr+'MXO44vsOldPreamp.csv', mode='w') as csv_file:
         
         inst.write("WGENerator1:FREQuency "+str(f))
         time.sleep(soak_time)
-        inst.write("TIMebase:SCALe "+str(round(1.0/f/3.0)))
+        inst.write("TIMebase:SCALe "+str(round(1.0/f/3.0,2)))
         inst.write("RUNSingle")
         time.sleep(1)
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
