@@ -18,7 +18,7 @@ print(inst.ask("*IDN?"))
 inst.clear()
 inst.write("*RST")
 inst.write("CHANnel"+input_chan+":RANGe 2")
-
+inst.write("STOP")
 inst.write("WGENerator1:PRESet")
 inst.write("CHANnel1:STATe OFF")
 inst.write("CHANnel"+input_chan+":STATe ON")
@@ -35,5 +35,11 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
     for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
-        print(f)
-        #inst.write("TIMebase:SCALe 1")
+        print("Testing at frequency "+str(f)+" Hz")
+        inst.write("TIMebase:SCALe "+str(1/f))
+        inst.write("WGENerator1:FREQuency "+str(f))
+        time.sleep(10)
+        inst.write("RUNSingle")
+        while not inst.ask("ACQuire:AVAilable?"):
+            time.sleep(1)
+        print("Measured "+inst.ask("MEASurement1:RESult:ACTual")+" Vpp")
