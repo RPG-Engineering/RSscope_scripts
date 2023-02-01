@@ -47,4 +47,4 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
             time.sleep(1)
             print ("Tick")
 
-        print("Measured "+inst.ask("MEASurement1:RESult:ACTual")+" Vpp")
+        print("Measured "+inst.ask("MEASurement1:RESult:ACTual?")+" Vpp")
