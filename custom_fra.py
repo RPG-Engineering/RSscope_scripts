@@ -7,7 +7,7 @@ import time
 input_chan = "3"
 StartFrequency = "0.01"
 StopFrequency = "15"
-Time = str(60*10)
+Time = "600"
 Amplitude = "1"
 
 
@@ -26,8 +26,8 @@ inst.write("WGENerator1:SWEep:STATe ON")
 inst.write("WGENerator1:SWEep:FSTart "+StartFrequency)
 inst.write("WGENerator1:SWEep:FEND "+StopFrequency)
 inst.write("WGENerator1:SWEep:TIME "+Time)
-inst.write("WGENerator1:VOLTage[:VPP] "+Amplitude)
-inst.write("WGENerator1[:ENABle] ON")
+inst.write("WGENerator1:VOLTage:VPP "+Amplitude)
+inst.write("WGENerator1:ENABle ON")
 
 
 
