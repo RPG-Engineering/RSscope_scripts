@@ -7,10 +7,10 @@ import csv
 import numpy
 
 input_chan = "3"
-StartFrequency = "0.01"
-StopFrequency = "15"
+StartFrequency = 0.01
+StopFrequency = 15.0
 npoints = 100
-Amplitude = "1"
+Amplitude = 1
 
 
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
@@ -26,7 +26,7 @@ inst.write("MEASurement1:MAIN PDELta")
 inst.write("MEASurement1:ENABle")
 inst.write("MEASurement1:SOURce C"+input_chan)
 
-inst.write("WGENerator1:VOLTage:VPP "+Amplitude)
+inst.write("WGENerator1:VOLTage:VPP "+str(Amplitude))
 inst.write("WGENerator1:ENABle ON")
 
 timestr = time.strftime("%Y%m%d-%H%M%S_")
