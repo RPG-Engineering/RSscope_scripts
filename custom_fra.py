@@ -47,6 +47,6 @@ with open('csv/'+timestr+'MXO44vsOldPreamp.csv', mode='w') as csv_file:
         time.sleep(1)
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
             time.sleep(1)
-        result = round(int(inst.ask("MEASurement1:RESult:ACTual?")),3)
+        result = round(float(inst.ask("MEASurement1:RESult:ACTual?")),3)
         print("Measured "+result+" Vpp")
         writer.writerow({'freq': round(f,3), 'Vppin': Amplitude, 'Vppout': result})
