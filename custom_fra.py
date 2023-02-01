@@ -9,7 +9,7 @@ import numpy
 input_chan = "3"
 StartFrequency = 0.01
 StopFrequency = 15.0
-npoints = 10
+npoints = 100
 Amplitude = 1
 
 
@@ -34,6 +34,6 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
     fieldnames = ['freq', 'Vppin', 'Vppout']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
-    for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints, endpoint=True, dtype=None, axis=0):
+    for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints):
         print(f)
         #inst.write("TIMebase:SCALe 1")
