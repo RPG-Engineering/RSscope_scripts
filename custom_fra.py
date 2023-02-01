@@ -7,7 +7,7 @@ import time
 input_chan = "3"
 StartFrequency = "0.01"
 StopFrequency = "15"
-Time = "120"
+Time = "240"
 Amplitude = "1"
 
 
@@ -24,6 +24,9 @@ inst.write("CHANnel"+input_chan+":STATe ON")
 inst.write("MEASurement1:MAIN PDELta")
 inst.write("MEASurement1:ENABle")
 inst.write("MEASurement1:SOURce C"+input_chan)
+inst.write("MEASurement2:MAIN FREQuency")
+inst.write("MEASurement2:ENABle")
+inst.write("MEASurement2:SOURce C"+input_chan)
 
 inst.write("WGENerator1:VOLTage:VPP "+Amplitude)
 inst.write("WGENerator1:ENABle ON")
