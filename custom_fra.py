@@ -11,6 +11,7 @@ StartFrequency = 0.1
 StopFrequency = 15.0
 npoints = 100
 Amplitude = 1
+soak_time = 10 # Depends on high pass filter capacitor type
 
 
 inst = vxi11.Instrument("TCPIP::192.168.178.31::INSTR")
@@ -40,12 +41,12 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         print("Testing at frequency "+str(round(f,3))+" Hz")
         
         inst.write("WGENerator1:FREQuency "+str(f))
-        time.sleep(10)
+        time.sleep(soak_time)
         inst.write("TIMebase:SCALe "+str(round(1.0/f/3.0)))
         inst.write("RUNSingle")
         time.sleep(1)
-        #inst.ask("ACQuire:AVAilable?") # I'd prefer a call that erases any previous Acquisitions
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
             time.sleep(1)
-            print("Tick")
-        print("Measured "+inst.ask("MEASurement1:RESult:ACTual?")+" Vpp")
+        result = inst.ask("MEASurement1:RESult:ACTual?")
+        print("Measured "+result+" Vpp")
+        writer.writerow({'freq': round(f,3), 'Vppin': Amplitude, 'Vppout': result})
