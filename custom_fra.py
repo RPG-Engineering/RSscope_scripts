@@ -25,14 +25,14 @@ inst.write("MEASurement1:SOURce C"+input_chan)
 inst.write("WGENerator1:SWEep:STATe ON")
 inst.write("WGENerator1:SWEep:FSTart "+StartFrequency)
 inst.write("WGENerator1:SWEep:FEND "+StopFrequency)
-inst.write("WGENerator<wg>:SWEep:TIME "+Time)
-inst.write("WGENerator<wg>:VOLTage[:VPP] "+Amplitude)
-inst.write("WGENerator<wg>[:ENABle] ON")
+inst.write("WGENerator1:SWEep:TIME "+Time)
+inst.write("WGENerator1:VOLTage[:VPP] "+Amplitude)
+inst.write("WGENerator1[:ENABle] ON")
 
 
 
 
 
-inst.write("TIMebase:SCALe 10")
-time.sleep(15)
+inst.write("TIMebase:SCALe 2")
+time.sleep(10)
 print(inst.ask("WGENerator1:FREQuency?"))
