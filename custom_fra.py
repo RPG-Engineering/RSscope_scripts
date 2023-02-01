@@ -43,7 +43,9 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         time.sleep(10)
         inst.write("TIMebase:SCALe "+str(round(1.0/f/3.0)))
         inst.write("RUNSingle")
-        #print(int(inst.ask("ACQuire:AVAilable?"))<1)
+        time.sleep(1)
+        #inst.ask("ACQuire:AVAilable?") # I'd prefer a call that erases any previous Acquisitions
         while (int(inst.ask("ACQuire:AVAilable?"))<1):
             time.sleep(1)
+            print("Tick")
         print("Measured "+inst.ask("MEASurement1:RESult:ACTual?")+" Vpp")
