@@ -42,6 +42,6 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         inst.write("RUNSingle")
         while True:
             #print (int(inst.ask("STATus:OPERation:CONDition?"))&0b001)
-            print (int(inst.ask("STATus:OPERation:CONDition?")))
+            print (inst.ask("ACQuire:AVAilable?"))
             time.sleep(1)
         print("Measured "+inst.ask("MEASurement1:RESult:ACTual")+" Vpp")
