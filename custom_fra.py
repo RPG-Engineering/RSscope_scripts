@@ -34,8 +34,6 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
     fieldnames = ['freq', 'Vppin', 'Vppout']
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     writer.writeheader()
-    a2 = np.arange(1,10,1)
-    answer = np.outer(a1, a2).flatten()
     for f in numpy.geomspace(StartFrequency, StopFrequency, num=npoints, endpoint=True, dtype=None, axis=0):
         print(f)
         #inst.write("TIMebase:SCALe 1")
