@@ -9,7 +9,7 @@ import numpy
 input_chan = "3"
 StartFrequency = 0.01
 StopFrequency = 15.0
-npoints = 100
+npoints = 10
 Amplitude = 1
 
 
