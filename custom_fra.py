@@ -16,7 +16,7 @@ print(inst.ask("*IDN?"))
 inst.clear()
 inst.write("*RST")
 inst.write("TIMebase:SCALe 1")
-inst.write("CHANnel"+input_chan+":RANGe 1")
+inst.write("CHANnel"+input_chan+":RANGe 2")
 
 inst.write("WGENerator1:PRESet")
 inst.write("CHANnel1:STATe OFF")
