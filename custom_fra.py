@@ -38,9 +38,9 @@ with open('csv/'+timestr+'MXO44vsOldPreamp', mode='w') as csv_file:
         print("Testing at frequency "+str(round(f,2))+" Hz")
         inst.write("TIMebase:SCALe "+str(round(1.0/f/5.0)))
         inst.write("WGENerator1:FREQuency "+str(f))
-        time.sleep(10)
+        #time.sleep(10)
         inst.write("RUNSingle")
         while True:
-            print (inst.ask("STATus:OPERation:CONDition?")&0b0001)
+            print (int(inst.ask("STATus:OPERation:CONDition?"))&0b0001)
             time.sleep(1)
         print("Measured "+inst.ask("MEASurement1:RESult:ACTual")+" Vpp")
